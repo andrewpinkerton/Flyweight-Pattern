@@ -10,7 +10,7 @@ public class MyFrame extends JFrame implements KeyListener{
     ImageIcon icon;
     boolean up, down, left, right;
     Timer moveTimer;
-    int speed = 10;
+    int speed = 15;
     int maxX = 800, maxY = 800, minX = 0, minY = 0;
 
 
@@ -30,13 +30,13 @@ public class MyFrame extends JFrame implements KeyListener{
         character.setIcon(icon);
 
         moveTimer = new Timer(20, e -> {
-            if (up && !(character.getY() < minY))
+            if (up && !(character.getY() < minY - 50))
                 character.setLocation(character.getX(), character.getY() - speed);
-            if (down && !(character.getY() > maxY - 225))
+            if (down && !(character.getY() > maxY - 250))
                 character.setLocation(character.getX(), character.getY() + speed);
-            if (left && !(character.getX() < minX))
+            if (left && !(character.getX() < minX + 10))
                 character.setLocation(character.getX() - speed, character.getY());
-            if (right && !(character.getX() > maxX - 150))
+            if (right && !(character.getX() > maxX - 180))
                 character.setLocation(character.getX() + speed, character.getY());
         });
         moveTimer.start();
