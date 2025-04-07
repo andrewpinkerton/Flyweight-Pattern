@@ -11,7 +11,7 @@ public class MyFrame extends JFrame implements KeyListener{
     boolean up, down, left, right;
     Timer moveTimer;
     int speed = 15;
-    int maxX = 800, maxY = 800, minX = 0, minY = 0;
+    int maxX = 1800, maxY = 800, minX = 0, minY = 0;
 
 
     MyFrame() {
@@ -25,11 +25,10 @@ public class MyFrame extends JFrame implements KeyListener{
 
         character = new JLabel();
         icon = new ImageIcon("character.png");
-
         character.setBounds(0, 550, 250, 250);
         character.setIcon(icon);
 
-        moveTimer = new Timer(20, e -> {
+        moveTimer = new Timer(0, e -> {
             if (up && !(character.getY() < minY - 50))
                 character.setLocation(character.getX(), character.getY() - speed);
             if (down && !(character.getY() > maxY - 250))
@@ -56,6 +55,7 @@ public class MyFrame extends JFrame implements KeyListener{
             case 'a': left = true; break;
             case 's': down = true; break;
             case 'd': right = true; break;
+            case ' ': shoot(); break;
         }
     }
 
@@ -67,5 +67,28 @@ public class MyFrame extends JFrame implements KeyListener{
             case 's': down = false; break;
             case 'd': right = false; break;
         }
+    }
+
+    void shoot(){
+        JLabel bullet = new JLabel();
+        ImageIcon bulletIcon = new ImageIcon("bullet.png");
+        bullet.setBounds(character.getX() + 150, character.getY() + 93, 76,76);
+        bullet.setIcon(bulletIcon);
+
+        this.add(bullet);
+        this.repaint();
+
+        Timer bulletTimer = new Timer(10, null);
+        bulletTimer.addActionListener(e -> {
+            bullet.setLocation(bullet.getX()+20, bullet.getY());
+
+            if (bullet.getX() > maxX) {
+                bulletTimer.stop();
+                this.remove(bullet);
+                this.repaint();
+            }
+        });
+
+        bulletTimer.start();
     }
 }
