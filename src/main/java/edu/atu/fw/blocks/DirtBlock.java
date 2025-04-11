@@ -1,9 +1,12 @@
-package edu.atu.fw;
+package edu.atu.fw.blocks;
+
+import edu.atu.fw.Block;
 
 import javax.swing.*;
 
-public class LeafBlock implements Block {
-    private ImageIcon leafTexture = new ImageIcon("leaf.png");
+// Concrete Flyweight
+public class DirtBlock implements Block {
+    private ImageIcon dirtTexture = new ImageIcon("dirt.png");
     private int height = 50, width = 50;
 
 
@@ -11,7 +14,7 @@ public class LeafBlock implements Block {
     public JFrame placeBlock(JFrame frame, int x, int y) {
         JLabel label = new JLabel();
         label.setBounds(x, y, width, height);
-        label.setIcon(leafTexture);
+        label.setIcon(dirtTexture);
 
         frame.add(label, 0);
 
