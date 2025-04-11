@@ -10,7 +10,7 @@ public class Steve extends JLabel {
     private final int jumpHeight = 100;
     private final int groundY;
 
-    private boolean down, left, right, jumping;
+    private boolean left, right, jumping;
     private int currentJumpHeight = 0;
 
     private final Timer moveTimer;
